@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboot.dao.UserDao">
+    <resultMap id="userResultMap" type="com.example.springboot.pojo.UserPojo">
+        <result column="u_id" property="id"></result>
+        <result column="u_name" property="name"></result>
+        <result column="u_password" property="pass"></result>
+        <result column="u_email" property="email"></result>
+        <result column="u_sex" property="sex"></result>
+        <result column="u_address" property="address"></result>
+        <result column="u_phone" property="phone"></result>
+        <result column="u_date" property="createDate"></result>
+    </resultMap>
+    <select id="findUser" parameterType="com.example.springboot.pojo.UserPojo" resultMap="userResultMap">
+        SELECT
+            u_id,
+            u_name,
+            u_password,
+            u_email,
+            u_sex,
+            u_address,
+            u_phone,
+            u_date
+        FROM `user`
+        WHERE u_name = #{item.name}
+        AND u_password =#{item.pass}
+    </select>
+
+    <insert id="addUser" parameterType="com.example.springboot.pojo.UserPojo">
+    INSERT INTO `user`(
+        u_name,
+        u_password,
+        u_phone
+    )
+    VALUES(
+        #{item.name},
+        #{item.pass},
+        #{item.phone}
+        )
+    </insert>
+</mapper>
